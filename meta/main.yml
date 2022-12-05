@@ -1,0 +1,30 @@
+---
+galaxy_info:
+  author: Daniel Gibbs
+  company: none
+  description: A role that installs Postfix and configures relay host
+  license: MIT
+  min_ansible_version: "2.12"
+  namespace: dgibbs64
+  role_name: postfix_relay
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
+    - name: EL
+      versions:
+        - "7"
+        - "8"
+        - "9"
+  galaxy_tags:
+    - molecule
+    - apache
+
+dependencies: []

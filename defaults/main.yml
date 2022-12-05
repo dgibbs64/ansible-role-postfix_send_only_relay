@@ -1,0 +1,7 @@
+---
+postfix_config_file: /etc/postfix/main.cf
+postfix_service_enabled: true
+postfix_service_state: started
+postfix_relayhost:
+postfix_sasl_username:
+postfix_sasl_password:

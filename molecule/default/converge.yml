@@ -1,0 +1,6 @@
+---
+- name: "Converge"
+  hosts: all
+
+  roles:
+    - role: "dgibbs64.postfix_relay"
