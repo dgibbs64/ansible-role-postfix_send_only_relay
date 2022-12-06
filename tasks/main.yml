@@ -50,11 +50,16 @@
     line: "{{ item.line }}"
     state: present
   with_items:
-    - "{{ regex: 'smtp_sasl_auth_enable', line: 'smtp_sasl_auth_enable = yes' }}"
-    - "{{ regex: 'smtp_sasl_password_maps', line: 'smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd' }}"
-    - "{{ regex: 'smtp_sasl_security_options', line: 'smtp_sasl_security_options = noanonymous' }}"
-    - "{{ regex: 'smtp_tls_security_level', line: 'smtp_tls_security_level = may' }}"
-    - "{{ regex: 'header_size_limit', line: 'header_size_limit = 4096000' }}"
+    - regex: "smtp_sasl_auth_enable"
+      line: "smtp_sasl_auth_enable = yes"
+    - regex: "smtp_sasl_password_maps"
+      line: "smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd"
+    - regex: "smtp_sasl_security_options"
+      line: "smtp_sasl_security_options = noanonymous"
+    - regex: "smtp_tls_security_level"
+      line: "smtp_tls_security_level = may"
+    - regex: "header_size_limit"
+      line: "header_size_limit = 4096000"
   notify: "Restart postfix"
 
 - name: "Ensure sasl_passwd file exists"
