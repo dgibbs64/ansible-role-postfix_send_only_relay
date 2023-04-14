@@ -1,0 +1,6 @@
+---
+- name: "Send Test Email"
+  mail:
+    to: "{{ postfix_test_send_email }}"
+    subject: "Test Email from {{ ansible_hostname }}"
+    body: "Sending email from {{ ansible_hostname }} using the Ansible postfix_relay role. If you recieved this email it means that postfix has sucessfully been configured and email is being delivered."

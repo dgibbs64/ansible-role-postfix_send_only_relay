@@ -1,0 +1,38 @@
+---
+- name: "Update apt cache (Debian Family)"
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+  when: ansible_os_family == "Debian"
+
+- name: "Ensure postfix is installed"
+  become: true
+  ansible.builtin.package:
+    name: postfix
+    state: present
+
+- name: "Ensure SASL packages are installed (Debian Family)"
+  become: true
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - sasl2-bin
+    - libsasl2-modules
+  when: ansible_os_family == "Debian"
+
+- name: "Install SASL packages (RedHat Family)"
+  become: true
+  ansible.builtin.package:
+    name:
+      - cyrus-sasl
+      - cyrus-sasl-plain
+      - cyrus-sasl-lib
+    state: present
+  when: ansible_os_family == "RedHat"
+
+- name: "Ensure postfix is started and enabled on boot"
+  ansible.builtin.service:
+    name: postfix
+    state: "started"
+    enabled: "true"

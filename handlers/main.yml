@@ -1,13 +1,17 @@
 ---
 - name: "Postmap sasl_passwd"
+  become: true
   ansible.builtin.command: postmap /etc/postfix/sasl_passwd
+  changed_when: true
 
 - name: "Restart postfix"
+  become: true
   ansible.builtin.service:
     name: postfix
     state: restarted
 
 - name: "Restart saslauthd"
+  become: true
   ansible.builtin.service:
     name: saslauthd
     state: restarted

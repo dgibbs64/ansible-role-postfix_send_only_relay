@@ -1,0 +1,17 @@
+---
+- name: "Set Postfix relayhost"
+  ansible.builtin.lineinfile:
+    path: "{{ postfix_config_file }}"
+    regexp: "^relayhost"
+    line: "relayhost = {{ postfix_relayhost }}"
+    state: present
+  notify: "Restart postfix"
+
+- name: "Set Postfix myorigin"
+  ansible.builtin.lineinfile:
+    path: /etc/postfix/main.cf
+    regexp: "^#?myorigin"
+    line: "myorigin = {{ postfix_myorigin }}"
+    state: present
+  notify: "Restart postfix"
+  when: postfix_myorigin is defined
