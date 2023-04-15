@@ -5,6 +5,11 @@
       - "distribution"
   when: ansible_facts['ansible_os_family'] is not defined or ansible_facts['ansible_distribution'] is not defined
 
+- name: "Assert"
+  delegate_to: localhost
+  run_once: true
+  ansible.builtin.import_tasks: assert.yml
+
 - name: "Install"
   become: true
   ansible.builtin.import_tasks: install.yml
@@ -16,6 +21,9 @@
 - name: "Auth"
   become: true
   ansible.builtin.import_tasks: auth.yml
+
+- name: "Flush handlers"
+  meta: flush_handlers
 
 - name: "Send Email"
   become: true

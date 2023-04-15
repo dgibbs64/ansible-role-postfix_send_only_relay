@@ -1,6 +1,10 @@
 ---
 postfix_config_file: /etc/postfix/main.cf
-postfix_myorigin:
+postfix_mydomain:
+postfix_myorigin: "$mydomain"
+postfix_mydestination: "$myhostname, localhost.$mydomain, localhost, $mydomain"
+postfix_inet_interfaces: loopback-only
+postfix_root_alias:
 postfix_relayhost:
 postfix_sasl_username:
 postfix_sasl_password:

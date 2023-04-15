@@ -1,0 +1,35 @@
+---
+- name: "Test if postfix_config_file is set correctly"
+  ansible.builtin.assert:
+    that:
+      - postfix_config_file is defined
+      - postfix_config_file is string
+    quiet: true
+
+- name: "Test if postfix_mydomain is set correctly"
+  ansible.builtin.assert:
+    that:
+      - postfix_mydomain is defined
+      - postfix_mydomain is string
+    quiet: true
+
+- name: "Test if postfix_relayhost is set correctly"
+  ansible.builtin.assert:
+    that:
+      - postfix_relayhost is defined
+      - postfix_relayhost is string
+    quiet: true
+
+- name: "Test if postfix_sasl_username is set correctly"
+  ansible.builtin.assert:
+    that:
+      - postfix_sasl_username is defined
+      - postfix_sasl_username is string
+    quiet: true
+
+- name: "Test if postfix_sasl_password is set correctly"
+  ansible.builtin.assert:
+    that:
+      - postfix_sasl_password is defined
+      - postfix_sasl_password is string
+    quiet: true

@@ -1,6 +1,12 @@
 ---
+
+- name: "Test domain"
+  debug:
+    msg="Once configured you can send an email to https://www.mail-tester.com to test your email server and domain is configured correctly."
+
 - name: "Send Test Email"
-  mail:
+  community.general.mail:
     to: "{{ postfix_test_send_email }}"
     subject: "Test Email from {{ ansible_hostname }}"
     body: "Sending email from {{ ansible_hostname }} using the Ansible postfix_relay role. If you recieved this email it means that postfix has sucessfully been configured and email is being delivered."
+  when: postfix_test_send_email is defined
