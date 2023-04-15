@@ -1,5 +1,5 @@
 ---
-- name: "Set Postfix relayhost"
+- name: "Set relayhost in main.cf"
   ansible.builtin.lineinfile:
     path: "{{ postfix_config_file }}"
     regexp: "^#?relayhost"
@@ -11,7 +11,7 @@
 - name: "Configure SASL authentication"
   when: postfix_sasl_username is defined and postfix_sasl_password is defined and postfix_relayhost is defined
   block:
-    - name: "Set SASL config to main.cf"
+    - name: "Set SASL configuration to main.cf"
       ansible.builtin.lineinfile:
         path: "{{ postfix_config_file }}"
         regexp: "{{ item.regexp }}"
@@ -55,14 +55,14 @@
         mode: "0440"
       when: sasl_passwd.stat.exists
 
-    - name: "Configure SASL Password"
+    - name: "Set SASL credentials in sasl_passwd"
       ansible.builtin.lineinfile:
         path: /etc/postfix/sasl_passwd
         regexp: "^#?{{ postfix_relayhost }}"
         line: "{{ postfix_relayhost }} {{ postfix_sasl_username }}:{{ postfix_sasl_password | quote }}"
         state: present
       notify:
-        - "Postmap sasl_passwd"
+        - "Run Postmap sasl_passwd"
         - "Restart saslauthd"
         - "Restart postfix"
 
@@ -71,7 +71,7 @@
         path: /etc/postfix/sasl_passwd.db
       register: sasl_passwd_db
 
-    - name: "Postmap sasl_passwd"
+    - name: "Run postmap sasl_passwd"
       ansible.builtin.command: "postmap /etc/postfix/sasl_passwd"
       notify:
         - "Restart saslauthd"

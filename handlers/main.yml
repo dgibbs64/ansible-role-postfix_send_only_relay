@@ -1,5 +1,5 @@
 ---
-- name: "Postmap sasl_passwd"
+- name: "Run Postmap sasl_passwd"
   become: true
   ansible.builtin.command: postmap /etc/postfix/sasl_passwd
   changed_when: true
@@ -10,7 +10,7 @@
     name: saslauthd
     state: restarted
 
-- name: "New aliases"
+- name: "Run newaliases"
   become: true
   ansible.builtin.command: newaliases
   changed_when: true

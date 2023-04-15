@@ -49,11 +49,11 @@
     - "Restart postfix"
   when: postfix_inet_interfaces is defined
 
-- name: "Set Postfix root alias"
+- name: "Set root alias in aliases"
   ansible.builtin.lineinfile:
     path: /etc/aliases
     regexp: "^root"
     line: "root: {{ postfix_root_alias }}"
     state: present
-  notify: "New aliases"
+  notify: "Run newaliases"
   when: postfix_root_alias is defined
