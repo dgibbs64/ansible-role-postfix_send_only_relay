@@ -1,6 +1,11 @@
 ---
 - name: "Converge"
   hosts: all
-
+  vars:
+    postfix_mydomain: "example.com"
+    postfix_relayhost: "[smtp.example.com]:587"
+    postfix_sasl_username: "username"
+    postfix_sasl_password: "password"
+    postfix_root_alias: "foobar@outlook.com"
   roles:
-    - role: "dgibbs64.postfix_relay"
+    - role: "dgibbs64.postfix_send_only_relay"
