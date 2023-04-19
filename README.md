@@ -1,38 +1,90 @@
-Role Name
-=========
+# postfix_send_only_relay
 
-A brief description of the role goes here.
+An [Ansible](https://www.ansible.com) role to install [Postfix](https://www.postfix.org) and configure as send-only via an SMTP relay.
 
-Requirements
-------------
+This role is designed to be used on a server that will only send emails and not receive them. This is useful for recieving emails from cron jobs or other services/applications that want to send emails from a server.
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+## Requirements
 
-Role Variables
---------------
+> A SMTP relay service is required.
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Your email provider may offer a SMTP relay service. If not, there are several popular SMTP relays that offer free tiers (others are also available).
 
-Dependencies
-------------
+| Service                            | Free Tier Email Limit       | Docs                                                                   |
+| ---------------------------------- | --------------------------- | ---------------------------------------------------------------------- |
+| [Mailjet](https://www.mailjet.com) | 6000 per month, 200 per day | [link](https://dev.mailjet.com/smtp-relay/overview)                    |
+| [Sendgrid](https://sendgrid.com)   | 3000 per month, 100 per day | [link](https://docs.sendgrid.com/for-developers/sending-email/postfix) |
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+## Role Variables
 
-Example Playbook
-----------------
+```yaml
+---
+# defaults file for ansible-role-postfix_send_only_relay
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+# Config path for postfix
+postfix_config_file: "/etc/postfix/main.cf"
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+# The domain that is used to send emails.
+postfix_mydomain:
 
-License
--------
+# The domain that is used to send emails if no domain is specified. This is usually the same as mydomain or myhostname
+postfix_myorigin: "$mydomain"
 
-BSD
+# mydestination controls a list of domains that postfix considers itself the final destination for.
+## When aliases are set, postfix needs to "proccess" the email to then forward it on using /etc/aliases.
+## example: root -> postfix -> root@example.com - > aliases -> fobar@outlook.com -> relayhost -> foobar@outlook.com
+postfix_mydestination: "$myhostname, localhost.$mydomain, localhost, $mydomain"
+## When aliases are not required localhost only entry will forward on all emails without any "processing" from postfix.
+## example: root -> postfix -> root@example.com -> relayhost -> root@example.com
+# postfix_mydestination: "localhost"
 
-Author Information
-------------------
+# interfaces that can send emails - loopback-only allowes only localhost to send.
+postfix_inet_interfaces: "loopback-only"
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+# The relay host of SMTP server.
+postfix_relayhost:
+
+# Username for SMTP server.
+postfix_sasl_username:
+# Password for SMTP server.
+postfix_sasl_password:
+
+# The domain that the mail command will use.
+postfix_mail_send_domain: "{{ postfix_mydomain }}"
+
+# Email address alias that will recieve all emails sent to the servers root user.
+postfix_root_alias:
+
+# Email address to recieve test email when role is run.
+postfix_test_send_email:
+```
+
+## Dependencies
+
+```
+community.general
+```
+
+## Example Playbook
+
+```yaml
+---
+- name: Linux Admin Packages
+  hosts: all
+  vars:
+    postfix_mydomain: "example.com"
+    postfix_relayhost: "[in-v3.mailjet.com]:587"
+    postfix_sasl_username: "username"
+    postfix_sasl_password: "password"
+    postfix_root_alias: "foobar@outlook.com"
+  roles:
+    - role: "dgibbs64.postfix_send_only_relay"
+```
+
+## License
+
+MIT
+
+## Author Information
+
+- [Daniel Gibbs](https://danielgibbs.co.uk)

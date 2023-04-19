@@ -2,7 +2,7 @@
 - name: "Set mydomain in main.cf"
   ansible.builtin.lineinfile:
     path: "{{ postfix_config_file }}"
-    regexp: "^#?mydomain"
+    regexp: "^mydomain"
     line: "mydomain = {{ postfix_mydomain }}"
     state: present
   notify:
@@ -12,7 +12,7 @@
 - name: "Set myhostname in main.cf"
   ansible.builtin.lineinfile:
     path: "{{ postfix_config_file }}"
-    regexp: "^#?myhostname"
+    regexp: "^myhostname"
     line: "myhostname = {{ postfix_myhostname }}"
     state: present
   notify:
@@ -22,7 +22,7 @@
 - name: "Set myorigin in main.cf"
   ansible.builtin.lineinfile:
     path: "{{ postfix_config_file }}"
-    regexp: "^#?myorigin"
+    regexp: "^myorigin"
     line: "myorigin = {{ postfix_myorigin }}"
     state: present
   notify:
@@ -32,7 +32,7 @@
 - name: "Set mydestination in main.cf"
   ansible.builtin.lineinfile:
     path: "{{ postfix_config_file }}"
-    regexp: "^#?mydestination"
+    regexp: "^mydestination"
     line: "mydestination = {{ postfix_mydestination }}"
     state: present
   notify:
@@ -42,7 +42,7 @@
 - name: "Set inet_interfaces in main.cf"
   ansible.builtin.lineinfile:
     path: "{{ postfix_config_file }}"
-    regexp: "^#?inet_interfaces"
+    regexp: "^inet_interfaces"
     line: "inet_interfaces = {{ postfix_inet_interfaces }}"
     state: present
   notify:
@@ -57,3 +57,26 @@
     state: present
   notify: "Run newaliases"
   when: postfix_root_alias is defined
+
+- name: "Check if mailutils.conf exists"
+  ansible.builtin.stat:
+    path: /etc/postfix/mailutils.conf
+  register: mailutils_conf
+
+- name: "Apply mailutils.conf template"
+  ansible.builtin.template:
+    src: mailutils.conf
+    dest: /etc/postfix/mailutils.conf
+    owner: root
+    group: root
+    mode: "0644"
+  notify: "Restart postfix"
+  when: postfix_mail_send_domain is defined and not mailutils_conf.stat.exists
+
+- name: "Set email-domain in mailutils.conf"
+  ansible.builtin.lineinfile:
+    path: /etc/postfix/mailutils.conf
+    regexp: "^email-domain"
+    line: "email-domain {{ postfix_mail_send_domain }}"
+    state: present
+  when: postfix_mail_send_domain is defined and mailutils_conf.stat.exists

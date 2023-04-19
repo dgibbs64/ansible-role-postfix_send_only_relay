@@ -1,8 +1,7 @@
 ---
-
 - name: "Test domain"
-  debug:
-    msg="Once configured you can send an email to https://www.mail-tester.com to test your email server and domain is configured correctly."
+  ansible.builtin.debug:
+    msg: "Once configured you can send an email to https://www.mail-tester.com to test your email server and domain is configured correctly."
 
 - name: "Send Test Email"
   community.general.mail:

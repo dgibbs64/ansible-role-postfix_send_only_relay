@@ -23,10 +23,9 @@
   ansible.builtin.import_tasks: auth.yml
 
 - name: "Flush handlers"
-  meta: flush_handlers
+  ansible.builtin.meta: flush_handlers
 
 - name: "Send Email"
+  when: postfix_test_send_email
   become: true
   ansible.builtin.import_tasks: send_email.yml
-
-

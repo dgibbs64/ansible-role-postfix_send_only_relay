@@ -1,11 +1,39 @@
 ---
-postfix_config_file: /etc/postfix/main.cf
+# defaults file for ansible-role-postfix_send_only_relay
+
+# Config path for postfix
+postfix_config_file: "/etc/postfix/main.cf"
+
+# The domain that is used to send emails.
 postfix_mydomain:
+
+# The domain that is used to send emails if no domain is specified. This is usually the same as mydomain or myhostname
 postfix_myorigin: "$mydomain"
+
+# mydestination controls a list of domains that postfix considers itself the final destination for.
+## When aliases are set, postfix needs to "proccess" the email to then forward it on using /etc/aliases.
+## example: root -> postfix -> root@example.com - > aliases -> fobar@outlook.com -> relayhost -> foobar@outlook.com
 postfix_mydestination: "$myhostname, localhost.$mydomain, localhost, $mydomain"
-postfix_inet_interfaces: loopback-only
-postfix_root_alias:
+## When aliases are not required localhost only entry will forward on all emails without any "processing" from postfix.
+## example: root -> postfix -> root@example.com -> relayhost -> root@example.com
+# postfix_mydestination: "localhost"
+
+# interfaces that can send emails - loopback-only allowes only localhost to send.
+postfix_inet_interfaces: "loopback-only"
+
+# The relay host of SMTP server.
 postfix_relayhost:
+
+# Username for SMTP server.
 postfix_sasl_username:
+# Password for SMTP server.
 postfix_sasl_password:
+
+# The domain that the mail command will use.
+postfix_mail_send_domain: "{{ postfix_mydomain }}"
+
+# Email address alias that will recieve all emails sent to the servers root user.
+postfix_root_alias:
+
+# Email address to recieve test email when role is run.
 postfix_test_send_email:

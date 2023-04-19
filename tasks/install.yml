@@ -6,13 +6,34 @@
   when: ansible_os_family == "Debian"
 
 - name: "Ensure postfix is installed"
-  become: true
   ansible.builtin.package:
     name: postfix
     state: present
 
-- name: "Ensure SASL packages are installed (Debian Family)"
+- name: "Ensure mailutils is installed (Debian Family)"
+  when: ansible_os_family == "Debian"
+  ansible.builtin.package:
+    name: mailutils
+    state: present
+
+- name: "Ensure mailx is installed (Red Hat Family)"
+  when:
+    - ansible_os_family == "RedHat"
+    - ansible_distribution_major_version|int <= 8
+  ansible.builtin.package:
+    name: mailx
+    state: present
+
+- name: "Ensure s-nail is installed (Red Hat Family)"
+  when:
+    - ansible_os_family == "RedHat"
+    - ansible_distribution_major_version|int >= 9
   become: true
+  ansible.builtin.package:
+    name: s-nail
+    state: present
+
+- name: "Ensure SASL packages are installed (Debian Family)"
   ansible.builtin.package:
     name: "{{ item }}"
     state: present
@@ -21,8 +42,7 @@
     - libsasl2-modules
   when: ansible_os_family == "Debian"
 
-- name: "Install SASL packages (RedHat Family)"
-  become: true
+- name: "Install SASL packages (Red Hat Family)"
   ansible.builtin.package:
     name:
       - cyrus-sasl
