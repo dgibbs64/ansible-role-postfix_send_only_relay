@@ -8,7 +8,7 @@ lint: |
 driver:
   name: docker
 platforms:
-  - name: "postfic_relay-${MOLECULE_IMAGE:-ubuntu2204}"
+  - name: "postfix_send_only_relay-${MOLECULE_IMAGE:-ubuntu2204}"
     image: "geerlingguy/docker-${MOLECULE_IMAGE:-ubuntu2204}-ansible:latest"
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:

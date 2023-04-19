@@ -1,3 +1,2 @@
 ---
-# vars file for dgibbs64.postfix_send_only_relay
 postfix_myhostname: "{{ ansible_fqdn }}"

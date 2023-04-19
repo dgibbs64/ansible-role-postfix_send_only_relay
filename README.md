@@ -19,8 +19,6 @@ Your email provider may offer a SMTP relay service. If not, there are several po
 
 ```yaml
 ---
-# defaults file for ansible-role-postfix_send_only_relay
-
 # Config path for postfix
 postfix_config_file: "/etc/postfix/main.cf"
 
