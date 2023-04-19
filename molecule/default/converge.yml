@@ -1,6 +1,7 @@
 ---
 - name: "Converge"
   hosts: all
+  gather_facts: false
   vars:
     postfix_mydomain: "example.com"
     postfix_relayhost: "[smtp.example.com]:587"
