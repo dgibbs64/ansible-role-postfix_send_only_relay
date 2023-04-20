@@ -2,11 +2,11 @@
 galaxy_info:
   author: Daniel Gibbs
   company: none
-  description: A role that installs Postfix and configures relay host
+  description: An Ansible role to install Postfix and configure as send-only via an SMTP relay.
   license: MIT
   min_ansible_version: "2.12"
   namespace: dgibbs64
-  role_name: postfix_relay
+  role_name: postfix_send_only_relay
 
   platforms:
     - name: Ubuntu
@@ -24,7 +24,7 @@ galaxy_info:
         - "8"
         - "9"
   galaxy_tags:
-    - molecule
-    - apache
+    - posfix
+    - smtp
 
 dependencies: []
