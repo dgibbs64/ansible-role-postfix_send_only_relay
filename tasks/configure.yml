@@ -77,6 +77,6 @@
   ansible.builtin.lineinfile:
     path: /etc/postfix/mailutils.conf
     regexp: "(\\s*)email-domain"
-    line: "     email-domain {{ postfix_mail_send_domain }}"
+    line: "   email-domain {{ postfix_mail_send_domain }}"
     state: present
   when: postfix_mail_send_domain is defined and mailutils_conf.stat.exists
