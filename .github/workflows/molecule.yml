@@ -45,6 +45,7 @@ jobs:
           - centos7
           - debian10
           - debian11
+          - debian12
           - fedora35
           - fedora36
           - fedora37
