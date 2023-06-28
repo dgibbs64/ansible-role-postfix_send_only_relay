@@ -8,10 +8,10 @@
 
     - name: "Check postfix service is started"
       ansible.builtin.fail:
-        msg: "Postfix service is stopped"
-      when: "'postfix' in services and services['postfix']['state'] == 'stopped'"
+        msg: "Postfix service is not started"
+      when: "'postfix' in services and services['postfix']['state'] != 'running'"
 
     - name: "Check postfix service is enabled"
       ansible.builtin.fail:
-        msg: "Postfix service is disabled"
-      when: "'postfix' in services and services['postfix']['enabled']"
+        msg: "Postfix service is not enabled"
+      when: "'postfix' in services and services['postfix']['status'] != 'enabled'"
