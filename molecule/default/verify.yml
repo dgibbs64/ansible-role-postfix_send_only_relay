@@ -1,0 +1,17 @@
+---
+- name: "Verify"
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: "Get service facts"
+      ansible.builtin.service_facts:
+
+    - name: "Check postfix service is started"
+      ansible.builtin.fail:
+        msg: "Postfix service is stopped"
+      when: "'postfix' in services and services['postfix']['state'] == 'stopped'"
+
+    - name: "Check postfix service is enabled"
+      ansible.builtin.fail:
+        msg: "Postfix service is disabled"
+      when: "'postfix' in services and services['postfix']['enabled']"

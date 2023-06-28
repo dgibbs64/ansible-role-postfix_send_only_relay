@@ -50,9 +50,3 @@
       - cyrus-sasl-lib
     state: present
   when: ansible_os_family == "RedHat"
-
-- name: "Ensure postfix is started and enabled on boot"
-  ansible.builtin.service:
-    name: postfix
-    state: "started"
-    enabled: "true"
