@@ -1,26 +1,24 @@
 ---
-- name: "Gather facts (distribution)"
+- name: "Gather facts"
   ansible.builtin.setup:
-    gather_subset:
-      - "distribution"
-  when: ansible_facts['ansible_os_family'] is not defined or ansible_facts['ansible_distribution'] is not defined
+  when: ansible_facts|default({}) == {}
 
 - name: "Assert"
-  delegate_to: localhost
-  run_once: true
   ansible.builtin.import_tasks: assert.yml
+  run_once: true
+  delegate_to: localhost
 
 - name: "Install"
   become: true
-  ansible.builtin.import_tasks: install.yml
+  ansible.builtin.include_tasks: install.yml
 
 - name: "Configure"
   become: true
-  ansible.builtin.import_tasks: configure.yml
+  ansible.builtin.include_tasks: configure.yml
 
 - name: "Auth"
   become: true
-  ansible.builtin.import_tasks: auth.yml
+  ansible.builtin.include_tasks: auth.yml
 
 - name: "Flush handlers"
   ansible.builtin.meta: flush_handlers
@@ -28,4 +26,4 @@
 - name: "Send Email"
   when: postfix_test_send_email
   become: true
-  ansible.builtin.import_tasks: send_email.yml
+  ansible.builtin.include_tasks: send_email.yml
