@@ -8,22 +8,21 @@
   run_once: true
   delegate_to: localhost
 
-- name: "Install"
+- name: "Become block"
   become: true
-  ansible.builtin.include_tasks: install.yml
+  block:
+    - name: "Install"
+      ansible.builtin.include_tasks: install.yml
 
-- name: "Configure"
-  become: true
-  ansible.builtin.include_tasks: configure.yml
+    - name: "Configure"
+      ansible.builtin.include_tasks: configure.yml
 
-- name: "Auth"
-  become: true
-  ansible.builtin.include_tasks: auth.yml
+    - name: "Auth"
+      ansible.builtin.include_tasks: auth.yml
 
-- name: "Flush handlers"
-  ansible.builtin.meta: flush_handlers
+    - name: "Flush handlers"
+      ansible.builtin.meta: flush_handlers
 
-- name: "Send Email"
-  when: postfix_test_send_email
-  become: true
-  ansible.builtin.include_tasks: send_email.yml
+    - name: "Send Email"
+      when: postfix_test_send_email
+      ansible.builtin.include_tasks: send_email.yml
