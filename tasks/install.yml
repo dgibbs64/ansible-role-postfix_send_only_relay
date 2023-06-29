@@ -43,7 +43,7 @@
     - libsasl2-modules
   when: ansible_os_family == "Debian"
 
-- name: "Install SASL packages (Red Hat Family)"
+- name: "Ensure SASL packages are installed (Red Hat Family)"
   ansible.builtin.package:
     name:
       - cyrus-sasl
@@ -51,3 +51,9 @@
       - cyrus-sasl-lib
     state: present
   when: ansible_os_family == "RedHat"
+
+- name: "Ensure SASL packages are installed (Suse Family)"
+  ansible.builtin.package:
+    name: cyrus-sasl-saslauthd
+    state: present
+  when: ansible_os_family == "Suse"
