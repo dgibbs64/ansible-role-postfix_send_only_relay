@@ -12,10 +12,13 @@ galaxy_info:
     - name: Ubuntu
       versions:
         - all
-    - name: Ubuntu
+    - name: Debian
       versions:
         - all
-    - name: Debian
+    - name: Fedora
+      versions:
+        - all
+    - name: Amazon
       versions:
         - all
     - name: EL
@@ -23,6 +26,9 @@ galaxy_info:
         - "7"
         - "8"
         - "9"
+    - name: opensuse
+      versions:
+        - all
   galaxy_tags:
     - posfix
     - smtp
