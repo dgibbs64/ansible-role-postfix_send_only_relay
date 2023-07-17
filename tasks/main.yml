@@ -16,9 +16,6 @@
     - name: "Install"
       ansible.builtin.include_tasks: install.yml
 
-    - name: "Flush handlers"
-      ansible.builtin.meta: flush_handlers
-
     - name: "Configure"
       ansible.builtin.include_tasks: configure.yml
 
