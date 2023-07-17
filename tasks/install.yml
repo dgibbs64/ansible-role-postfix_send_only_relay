@@ -9,6 +9,7 @@
   ansible.builtin.package:
     name: postfix
     state: present
+  notify: Restart postfix
 
 - name: "Ensure mailutils is installed (Debian Family)"
   ansible.builtin.package:
@@ -36,11 +37,10 @@
 
 - name: "Ensure SASL packages are installed (Debian Family)"
   ansible.builtin.package:
-    name: "{{ item }}"
+    name:
+      - sasl2-bin
+      - libsasl2-modules
     state: present
-  loop:
-    - sasl2-bin
-    - libsasl2-modules
   when: ansible_os_family == "Debian"
 
 - name: "Ensure SASL packages are installed (Red Hat Family)"
