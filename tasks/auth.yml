@@ -71,13 +71,18 @@
         path: /etc/postfix/sasl_passwd.db
       register: sasl_passwd_db
 
+    - name: "Check sasl_passwd.lmdb exists"
+      ansible.builtin.stat:
+        path: /etc/postfix/sasl_passwd.lmdb
+      register: sasl_passwd_lmdb
+
     - name: "Run postmap sasl_passwd"
       ansible.builtin.command: "postmap /etc/postfix/sasl_passwd"
       notify:
         - "Restart saslauthd"
         - "Restart postfix"
       changed_when: true
-      when: not sasl_passwd_db.stat.exists
+      when: not sasl_passwd_db.stat.exists and not sasl_passwd_lmdb.stat.exists
 
     - name: "Ensure sasl_passwd.db permissions are correct"
       ansible.builtin.file:
