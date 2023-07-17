@@ -9,6 +9,7 @@
   ansible.builtin.package:
     name: postfix
     state: present
+  notify: "Restart Postfix Suse"
 
 - name: "Ensure mailutils is installed (Debian Family)"
   ansible.builtin.package:
@@ -55,10 +56,4 @@
   ansible.builtin.package:
     name: cyrus-sasl-saslauthd
     state: present
-  when: ansible_os_family == "Suse"
-
-- name: "Restart Postfic (Suse Family)"
-  ansible.builtin.service:
-    name: postfix
-    state: restarted
   when: ansible_os_family == "Suse"

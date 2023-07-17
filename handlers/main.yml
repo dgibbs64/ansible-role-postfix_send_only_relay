@@ -20,3 +20,9 @@
   ansible.builtin.service:
     name: postfix
     state: restarted
+
+- name: "Restart Postfix Suse"
+  ansible.builtin.service:
+    name: postfix
+    state: restarted
+  when: ansible_os_family == "Suse"
