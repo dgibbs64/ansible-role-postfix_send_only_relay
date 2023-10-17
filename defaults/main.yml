@@ -37,3 +37,6 @@ postfix_root_alias:
 
 # Email address to recieve test email when role is run.
 postfix_test_send_email:
+
+# The email address that will be used to send test emails.
+postfix_mailutils_config_file: "/etc/mailutils.conf"

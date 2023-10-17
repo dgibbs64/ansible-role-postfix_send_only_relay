@@ -60,13 +60,13 @@
 
 - name: "Check if mailutils.conf exists"
   ansible.builtin.stat:
-    path: /etc/postfix/mailutils.conf
+    path: postfix_mailutils_config_file
   register: mailutils_conf
 
 - name: "Apply mailutils.conf template"
   ansible.builtin.template:
     src: mailutils.conf
-    dest: /etc/postfix/mailutils.conf
+    dest: postfix_mailutils_config_file
     owner: root
     group: root
     mode: "0644"
@@ -75,7 +75,7 @@
 
 - name: "Set email-domain in mailutils.conf"
   ansible.builtin.lineinfile:
-    path: /etc/postfix/mailutils.conf
+    path: postfix_mailutils_config_file
     regexp: "(\\s*)email-domain"
     line: "   email-domain {{ postfix_mail_send_domain }};"
     state: present
