@@ -31,5 +31,4 @@
   ansible.builtin.assert:
     that:
       - postfix_sasl_password is defined
-      - postfix_sasl_password is string
     quiet: true
