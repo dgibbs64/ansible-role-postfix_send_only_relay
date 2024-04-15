@@ -5,8 +5,6 @@ An [Ansible](https://www.ansible.com) role to install [Postfix](https://www.post
 <p align="center">
 <a href="https://app.codacy.com/gh/dgibbs64/ansible-role-postfix_send_only_relay"><img src="https://img.shields.io/codacy/grade/1a892d499efd4dabb73beffa8d64ed01?logo=codacy&style=flat-square" alt="Codacy grade"></a>
 <a href="https://github.com/dgibbs64/ansible-role-postfix_send_only_relay/actions/workflows/molecule.yml"><img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/dgibbs64/ansible-role-postfix_send_only_relay/molecule.yml?label=molecule&logo=ansible&style=flat-square"></a>
-<a href="https://galaxy.ansible.com/dgibbs64/postfix_send_only_relay"><img alt="Ansible Quality Score" src="https://img.shields.io/ansible/quality/62113?logo=ansible&style=flat-square"></a>
-<a href="https://galaxy.ansible.com/dgibbs64/postfix_send_only_relay"><img alt="Ansible Role" src="https://img.shields.io/ansible/role/d/62113?color=EE0000&logo=ansible&style=flat-square"></a>
 <a href="https://galaxy.ansible.com/dgibbs64/postfix_send_only_relay"><img alt="GitHub tag (latest by date)" src="https://img.shields.io/github/v/tag/dgibbs64/ansible-role-postfix_send_only_relay?color=EE0000&label=release&logo=ansible&style=flat-square"></a>
 <a href="https://github.com/dgibbs64/ansible-role-postfix_send_only_relay/blob/main/LICENSE.md"><img src="https://img.shields.io/github/license/gameservermanagers/docker-steamcmd?style=flat-square" alt="MIT License"></a>
 </p>
