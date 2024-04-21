@@ -24,6 +24,20 @@ Your email provider may offer a SMTP relay service. If not, there are several po
 | [Mailjet](https://www.mailjet.com) | 6000 per month, 200 per day | [link](https://dev.mailjet.com/smtp-relay/overview)                    |
 | [Sendgrid](https://sendgrid.com)   | 3000 per month, 100 per day | [link](https://docs.sendgrid.com/for-developers/sending-email/postfix) |
 
+### Supported Distros
+
+- AlmaLinux >= 8
+- AmazonLinux 2023
+- CentOS >= 7
+- Debian >= 10
+- Fedora >= 37
+- openSUSE >= 15.4
+- OracleLinux >= 8
+- Pop!\_OS >= 18.04
+- Redhat Enterprise Linux >= 8
+- Rocky Linux >= 8
+- Ubuntu >= 18.04
+
 ## Role Variables
 
 ```yaml
@@ -68,7 +82,7 @@ postfix_test_send_email:
 
 ## Dependencies
 
-```
+```yaml
 community.general
 ```
 
