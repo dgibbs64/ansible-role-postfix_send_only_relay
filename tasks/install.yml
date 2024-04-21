@@ -1,21 +1,35 @@
 ---
-- name: "Update apt cache (Debian Family)"
+- name: "Ensure postfix is installed (apt)"
   ansible.builtin.apt:
+    name:
+      - postfix
+      - mailutils
+    state: present
     update_cache: true
     cache_valid_time: 3600
-  when: ansible_os_family == "Debian"
+  when: ansible_pkg_mgr == "apt"
 
-- name: "Ensure postfix is installed"
-  ansible.builtin.package:
+- name: "Ensure postfix is installed (dnf)"
+  ansible.builtin.dnf:
     name: postfix
     state: present
-  notify: "Restart Postfix Suse"
+    update_cache: true
+  when: ansible_pkg_mgr == "dnf"
 
-- name: "Ensure mailutils is installed (Debian Family)"
-  ansible.builtin.package:
-    name: mailutils
+- name: "Ensure postfix is installed (yum)"
+  ansible.builtin.yum:
+    name: postfix
     state: present
-  when: ansible_os_family == "Debian"
+    update_cache: true
+  when: ansible_pkg_mgr == "yum"
+
+- name: "Ensure postfix is installed (zypper)"
+  community.general.zypper:
+    name: postfix
+    state: present
+    update_cache: true
+  notify: "Restart postfix"
+  when: ansible_pkg_mgr == "zypper"
 
 - name: "Ensure mailx is installed (Red Hat Family)"
   ansible.builtin.package:
@@ -35,25 +49,39 @@
     - ansible_distribution_major_version|int >= 9
     - ansible_distribution_major_version|int != 2023
 
-- name: "Ensure SASL packages are installed (Debian Family)"
-  ansible.builtin.package:
+- name: "Ensure SASL packages are installed (apt)"
+  ansible.builtin.apt:
     name:
       - sasl2-bin
       - libsasl2-modules
     state: present
-  when: ansible_os_family == "Debian"
+    update_cache: true
+    cache_valid_time: 3600
+  when: ansible_pkg_mgr == "apt"
 
-- name: "Ensure SASL packages are installed (Red Hat Family)"
-  ansible.builtin.package:
+- name: "Ensure SASL packages are installed (dnf)"
+  ansible.builtin.dnf:
     name:
       - cyrus-sasl
       - cyrus-sasl-plain
       - cyrus-sasl-lib
     state: present
-  when: ansible_os_family == "RedHat"
+    update_cache: true
+  when: ansible_pkg_mgr == "dnf"
 
-- name: "Ensure SASL packages are installed (Suse Family)"
-  ansible.builtin.package:
+- name: "Ensure SASL packages are installed (yum)"
+  ansible.builtin.yum:
+    name:
+      - cyrus-sasl
+      - cyrus-sasl-plain
+      - cyrus-sasl-lib
+    state: present
+    update_cache: true
+  when: ansible_pkg_mgr == "yum"
+
+- name: "Ensure SASL packages are installed (zypper)"
+  community.general.zypper:
     name: cyrus-sasl-saslauthd
     state: present
-  when: ansible_os_family == "Suse"
+    update_cache: true
+  when: ansible_pkg_mgr == "zypper"
