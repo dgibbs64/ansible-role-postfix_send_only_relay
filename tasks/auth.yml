@@ -58,7 +58,7 @@
     - name: "Set SASL credentials in sasl_passwd"
       ansible.builtin.lineinfile:
         path: /etc/postfix/sasl_passwd
-        regexp: "^{{ postfix_relayhost }}"
+        regexp: "^{{ postfix_relayhost | ansible.builtin.regex_escape() }}"
         line: "{{ postfix_relayhost }} {{ postfix_sasl_username }}:{{ postfix_sasl_password | quote }}"
         state: present
       notify:
