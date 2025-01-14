@@ -65,7 +65,7 @@
 
 - name: "Apply mailutils.conf template"
   ansible.builtin.template:
-    src: mailutils.conf
+    src: mailutils.conf.j2
     dest: postfix_mailutils_config_file
     owner: root
     group: root
