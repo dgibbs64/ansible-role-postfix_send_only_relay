@@ -26,16 +26,16 @@ Your email provider may offer a SMTP relay service. If not, there are several po
 
 ### Supported Distros
 
-- AlmaLinux >= 8
+- AlmaLinux >= 9
 - AmazonLinux 2023
 - CentOS >= 7
 - Debian >= 10
 - Fedora >= 37
 - openSUSE >= 15.4
-- OracleLinux >= 8
+- OracleLinux >= 9
 - Pop!\_OS >= 18.04
-- Redhat Enterprise Linux >= 8
-- Rocky Linux >= 8
+- Redhat Enterprise Linux >= 9
+- Rocky Linux >= 9
 - Ubuntu >= 18.04
 
 ## Role Variables

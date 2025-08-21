@@ -16,13 +16,6 @@
     update_cache: true
   when: ansible_pkg_mgr == "dnf"
 
-- name: "Ensure postfix is installed (yum)"
-  ansible.builtin.yum:
-    name: postfix
-    state: present
-    update_cache: true
-  when: ansible_pkg_mgr == "yum"
-
 - name: "Ensure postfix is installed (zypper)"
   community.general.zypper:
     name: postfix
@@ -68,16 +61,6 @@
     state: present
     update_cache: true
   when: ansible_pkg_mgr == "dnf"
-
-- name: "Ensure SASL packages are installed (yum)"
-  ansible.builtin.yum:
-    name:
-      - cyrus-sasl
-      - cyrus-sasl-plain
-      - cyrus-sasl-lib
-    state: present
-    update_cache: true
-  when: ansible_pkg_mgr == "yum"
 
 - name: "Ensure SASL packages are installed (zypper)"
   community.general.zypper:
