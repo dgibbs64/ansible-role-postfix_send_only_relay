@@ -19,10 +19,10 @@ This role is designed to be used on a server that will only send emails and not 
 
 Your email provider may offer a SMTP relay service. If not, there are several popular SMTP relays that offer free tiers (others are also available).
 
-| Service                            | Free Tier Email Limit       | Docs                                                                   |
-| ---------------------------------- | --------------------------- | ---------------------------------------------------------------------- |
-| [Mailjet](https://www.mailjet.com) | 6000 per month, 200 per day | [link](https://dev.mailjet.com/smtp-relay/overview)                    |
-| [Sendgrid](https://sendgrid.com)   | 3000 per month, 100 per day | [link](https://docs.sendgrid.com/for-developers/sending-email/postfix) |
+| Service                            | Free Tier Email Limit       | Docs                                                                                       |
+| ---------------------------------- | --------------------------- | ------------------------------------------------------------------------------------------ |
+| [Mailjet](https://www.mailjet.com) | 6000 per month, 200 per day | [Mailjet SMTP relay docs](https://dev.mailjet.com/smtp-relay/overview)                     |
+| [Sendgrid](https://sendgrid.com)   | 3000 per month, 100 per day | [Sendgrid SMTP relay docs](https://docs.sendgrid.com/for-developers/sending-email/postfix) |
 
 ### Supported Distros
 
