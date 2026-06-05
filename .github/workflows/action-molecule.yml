@@ -44,14 +44,13 @@ jobs:
           - amazonlinux2023
           - debian11
           - debian12
-          - fedora39
-          - fedora40
+          - debian13
           - opensuseleap15
           - rockylinux8
           - rockylinux9
-          - ubuntu2004
+          - rockylinux10
           - ubuntu2204
-          - ubuntu2404
+          - ubuntu2604
         ansible_core_version:
           - 2.16
           - latest
@@ -60,6 +59,7 @@ jobs:
             ansible_core_version: latest
           - distro: opensuseleap15
             ansible_core_version: latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v5
