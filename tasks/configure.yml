@@ -58,11 +58,6 @@
   notify: "Run newaliases"
   when: postfix_root_alias is defined
 
-- name: "Check if mailutils.conf exists"
-  ansible.builtin.stat:
-    path: postfix_mailutils_config_file
-  register: mailutils_conf
-
 - name: "Apply mailutils.conf template"
   ansible.builtin.template:
     src: mailutils.conf.j2
@@ -71,12 +66,4 @@
     group: root
     mode: "0644"
   notify: "Restart postfix"
-  when: postfix_mail_send_domain is defined and not mailutils_conf.stat.exists
-
-- name: "Set email-domain in mailutils.conf"
-  ansible.builtin.lineinfile:
-    path: postfix_mailutils_config_file
-    regexp: "(\\s*)email-domain"
-    line: "   email-domain {{ postfix_mail_send_domain }};"
-    state: present
-  when: postfix_mail_send_domain is defined and mailutils_conf.stat.exists
+  when: postfix_mail_send_domain is defined
