@@ -2,7 +2,10 @@
   "name": "Ansible Dev Container",
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
   "features": {
-    "ghcr.io/devcontainers-community/npm-features/prettier:1": {},
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
+    "ghcr.io/devcontainers-community/npm-features/prettier:1": {
+      "plugins": "prettier-plugin-sh prettier-plugin-jinja-template"
+    },
     "ghcr.io/devcontainers-extra/features/actionlint:1": {},
     "ghcr.io/devcontainers-extra/features/ansible:2": {},
     "ghcr.io/devcontainers-extra/features/checkov:1": {},
@@ -10,7 +13,10 @@
     "ghcr.io/devcontainers-extra/features/shellcheck:1": {},
     "ghcr.io/devcontainers-extra/features/yamllint:2": {},
     "ghcr.io/devcontainers/features/github-cli:1": {},
-    "ghcr.io/hspaans/devcontainer-features/ansible-lint:2": {}
+    "ghcr.io/devcontainers-extra/features/act:1": {}
+  },
+  "remoteEnv": {
+    "PATH": "${containerEnv:PATH}:/home/vscode/.local/bin"
   },
   "customizations": {
     "vscode": {
@@ -24,12 +30,8 @@
         "redhat.vscode-yaml",
         "wholroyd.jinja",
         "yzhang.markdown-all-in-one"
-      ],
-      "settings": {
-        "files.eol": "\n"
-      }
+      ]
     }
   },
-  "postCreateCommand": "npm init -y >/dev/null 2>&1 || true && npm install --no-save prettier prettier-plugin-sh prettier-plugin-jinja-template",
-  "postStartCommand": "bash -lc 'git config --local core.autocrlf false || true; git config --local core.eol lf || true; git config --global core.autocrlf false || true; git config --global core.eol lf || true; echo Git configured to use LF line endings'"
+  "postCreateCommand": "npm init -y >/dev/null 2>&1 || true && npm install --no-save prettier prettier-plugin-sh prettier-plugin-jinja-template && sudo apt-get update && sudo apt-get install -y ripgrep && python3 -m pip install --user --break-system-packages molecule molecule-plugins[docker] jmespath passlib ansible-lint"
 }
