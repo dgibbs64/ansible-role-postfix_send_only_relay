@@ -9,7 +9,8 @@
     "ghcr.io/devcontainers-extra/features/markdownlint-cli:1": {},
     "ghcr.io/devcontainers-extra/features/shellcheck:1": {},
     "ghcr.io/devcontainers-extra/features/yamllint:2": {},
-    "ghcr.io/devcontainers/features/github-cli:1": {}
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/hspaans/devcontainer-features/ansible-lint:2": {}
   },
   "customizations": {
     "vscode": {
@@ -23,8 +24,12 @@
         "redhat.vscode-yaml",
         "wholroyd.jinja",
         "yzhang.markdown-all-in-one"
-      ]
+      ],
+      "settings": {
+        "files.eol": "\n"
+      }
     }
   },
-  "postCreateCommand": "npm init -y >/dev/null 2>&1 || true && npm install --no-save prettier prettier-plugin-sh prettier-plugin-jinja-template"
+  "postCreateCommand": "npm init -y >/dev/null 2>&1 || true && npm install --no-save prettier prettier-plugin-sh prettier-plugin-jinja-template",
+  "postStartCommand": "bash -lc 'git config --local core.autocrlf false || true; git config --local core.eol lf || true; git config --global core.autocrlf false || true; git config --global core.eol lf || true; echo Git configured to use LF line endings'"
 }

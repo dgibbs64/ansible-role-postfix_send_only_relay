@@ -1,0 +1,28 @@
+{
+  "name": "ansible-role-postfix_send_only_relay",
+  "version": "1.0.0",
+  "description": "An [Ansible](https://www.ansible.com) role to install [Postfix](https://www.postfix.org) and configure as send-only via an SMTP relay.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dgibbs64/ansible-role-postfix_send_only_relay.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dgibbs64/ansible-role-postfix_send_only_relay/issues"
+  },
+  "homepage": "https://github.com/dgibbs64/ansible-role-postfix_send_only_relay#readme",
+  "dependencies": {
+    "prettier": "^3.6.2",
+    "prettier-plugin-jinja-template": "^2.1.0",
+    "prettier-plugin-sh": "^0.18.0",
+    "sh-syntax": "^0.5.8",
+    "tslib": "^2.8.1"
+  },
+  "devDependencies": {}
+}
