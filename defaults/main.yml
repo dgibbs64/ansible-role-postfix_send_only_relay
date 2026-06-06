@@ -36,7 +36,7 @@ postfix_mail_send_domain: "{{ postfix_mydomain }}"
 postfix_root_alias:
 
 # Email address to recieve test email when role is run.
-postfix_test_send_email:
+postfix_test_send_email: false
 
 # The email address that will be used to send test emails.
 postfix_mailutils_config_file: "/etc/mailutils.conf"
