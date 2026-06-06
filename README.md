@@ -11,7 +11,7 @@ An [Ansible](https://www.ansible.com) role to install [Postfix](https://www.post
 
 ## About
 
-This role is designed to be used on a server that will only send emails and not receive them. This is useful for recieving emails from cron jobs or other services/applications that want to send emails from a server.
+This role is designed to be used on a server that will only send emails and not receive them. This is useful for receiving emails from cron jobs or other services/applications that want to send emails from a server.
 
 ## Requirements
 
@@ -52,14 +52,14 @@ postfix_mydomain:
 postfix_myorigin: "$mydomain"
 
 # mydestination controls a list of domains that postfix considers itself the final destination for.
-## When aliases are set, postfix needs to "proccess" the email to then forward it on using /etc/aliases.
+## When aliases are set, postfix needs to "process" the email to then forward it on using /etc/aliases.
 ## example: root -> postfix -> root@example.com - > aliases -> fobar@outlook.com -> relayhost -> foobar@outlook.com
 postfix_mydestination: "$myhostname, localhost.$mydomain, localhost, $mydomain"
 ## When aliases are not required localhost only entry will forward on all emails without any "processing" from postfix.
 ## example: root -> postfix -> root@example.com -> relayhost -> root@example.com
 # postfix_mydestination: "localhost"
 
-# interfaces that can send emails - loopback-only allowes only localhost to send.
+# interfaces that can send emails - loopback-only allows only localhost to send.
 postfix_inet_interfaces: "loopback-only"
 
 # The relay host of SMTP server.
@@ -73,10 +73,10 @@ postfix_sasl_password:
 # The domain that the mail command will use.
 postfix_mail_send_domain: "{{ postfix_mydomain }}"
 
-# Email address alias that will recieve all emails sent to the servers root user.
+# Email address alias that will receive all emails sent to the servers root user.
 postfix_root_alias:
 
-# Email address to recieve test email when role is run.
+# Email address to receive test email when role is run.
 postfix_test_send_email:
 ```
 
