@@ -6,10 +6,10 @@
     line: "relayhost = {{ postfix_relayhost }}"
     state: present
   notify: "Restart postfix"
-  when: postfix_relayhost is defined
+  when: postfix_relayhost is not none
 
 - name: "Configure SASL authentication"
-  when: postfix_sasl_username is defined and postfix_sasl_password is defined and postfix_relayhost is defined
+  when: postfix_sasl_username is not none and postfix_sasl_password is not none and postfix_relayhost is not none
   block:
     - name: "Set SASL configuration to main.cf"
       ansible.builtin.lineinfile:

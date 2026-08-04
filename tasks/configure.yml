@@ -7,7 +7,7 @@
     state: present
   notify:
     - "Restart postfix"
-  when: postfix_mydomain is defined
+  when: postfix_mydomain is not none
 
 - name: "Set myhostname in main.cf"
   ansible.builtin.lineinfile:
@@ -17,7 +17,7 @@
     state: present
   notify:
     - "Restart postfix"
-  when: postfix_myhostname is defined
+  when: postfix_myhostname is not none
 
 - name: "Set myorigin in main.cf"
   ansible.builtin.lineinfile:
@@ -56,7 +56,7 @@
     line: "root: {{ postfix_root_alias }}"
     state: present
   notify: "Run newaliases"
-  when: postfix_root_alias is defined
+  when: postfix_root_alias is not none
 
 - name: "Apply mailutils.conf template"
   ansible.builtin.template:
