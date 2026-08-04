@@ -6,7 +6,7 @@ An [Ansible](https://www.ansible.com) role to install [Postfix](https://www.post
 <a href="https://app.codacy.com/gh/dgibbs64/ansible-role-postfix_send_only_relay"><img src="https://img.shields.io/codacy/grade/1a892d499efd4dabb73beffa8d64ed01?logo=codacy&style=flat-square" alt="Codacy grade"></a>
 <a href="https://github.com/dgibbs64/ansible-role-postfix_send_only_relay/actions/workflows/molecule.yml"><img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/dgibbs64/ansible-role-postfix_send_only_relay/molecule.yml?label=molecule&logo=ansible&style=flat-square"></a>
 <a href="https://galaxy.ansible.com/dgibbs64/postfix_send_only_relay"><img alt="GitHub tag (latest by date)" src="https://img.shields.io/github/v/tag/dgibbs64/ansible-role-postfix_send_only_relay?color=EE0000&label=release&logo=ansible&style=flat-square"></a>
-<a href="https://github.com/dgibbs64/ansible-role-postfix_send_only_relay/blob/main/LICENSE.md"><img src="https://img.shields.io/github/license/gameservermanagers/docker-steamcmd?style=flat-square" alt="MIT License"></a>
+<a href="https://github.com/dgibbs64/ansible-role-postfix_send_only_relay/blob/main/LICENSE.md"><img src="https://img.shields.io/github/license/dgibbs64/ansible-role-postfix_send_only_relay?style=flat-square" alt="MIT License"></a>
 </p>
 
 ## About
@@ -48,6 +48,9 @@ postfix_config_file: "/etc/postfix/main.cf"
 # The domain that is used to send emails.
 postfix_mydomain:
 
+# The hostname used by postfix. Optional - only applied if defined.
+postfix_myhostname:
+
 # The domain that is used to send emails if no domain is specified. This is usually the same as mydomain or myhostname
 postfix_myorigin: "$mydomain"
 
@@ -78,6 +81,9 @@ postfix_root_alias:
 
 # Email address to receive test email when role is run.
 postfix_test_send_email:
+
+# The path to the mailutils.conf file used to set the domain that the mail command will use.
+postfix_mailutils_config_file: "/etc/mailutils.conf"
 ```
 
 ## Dependencies
@@ -90,7 +96,7 @@ community.general
 
 ```yaml
 ---
-- name: Linux Admin Packages
+- name: Postfix Send Only Relay
   hosts: all
   vars:
     postfix_mydomain: "example.com"

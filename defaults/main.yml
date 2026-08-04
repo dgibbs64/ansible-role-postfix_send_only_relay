@@ -7,6 +7,9 @@ postfix_config_file: "/etc/postfix/main.cf"
 # The domain that is used to send emails.
 postfix_mydomain:
 
+# The hostname used by postfix. Optional - only applied if defined.
+postfix_myhostname:
+
 # The domain that is used to send emails if no domain is specified. This is usually the same as mydomain or myhostname
 postfix_myorigin: "$mydomain"
 

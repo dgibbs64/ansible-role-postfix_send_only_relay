@@ -9,3 +9,5 @@
     subject: "Test Email from {{ ansible_hostname }}"
     body: "Sending email from {{ ansible_hostname }} using the Ansible postfix_relay role. If you received this email it means that postfix has successfully been configured and email is being delivered."
   when: postfix_test_send_email is defined
+  tags:
+    - molecule-notest
